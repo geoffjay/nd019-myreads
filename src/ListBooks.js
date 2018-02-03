@@ -7,6 +7,7 @@ class ListBooks extends Component {
 
   static propTypes = {
     books: PropTypes.array.isRequired,
+    onChangeBookShelf: PropTypes.func.isRequired
   }
 
   render() {
@@ -20,14 +21,17 @@ class ListBooks extends Component {
             <BookShelf
               title="Currently Reading"
               books={this.props.books.filter((b) => b.shelf === 'currentlyReading')}
+              onChangeBookShelf={this.props.onChangeBookShelf}
             />
             <BookShelf
               title="Want to Read"
               books={this.props.books.filter((b) => b.shelf === 'wantToRead')}
+              onChangeBookShelf={this.props.onChangeBookShelf}
             />
             <BookShelf
               title="Read"
               books={this.props.books.filter((b) => b.shelf === 'read')}
+              onChangeBookShelf={this.props.onChangeBookShelf}
             />
           </div>
         </div>

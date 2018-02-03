@@ -10,11 +10,26 @@ class App extends Component {
     books: []
   }
 
-
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
     })
+  }
+
+  changeBookShelf = (book, shelf) => {
+    this.setState({
+      books: this.state.books.map(
+        (b) => b.id === book.id ? Object.assign({}, b, {shelf: shelf}) : b
+      )
+    })
+    //this.setState((state) => ({
+      //books: state.books.map((b) => {
+        //if(b.id === book.id)
+          //b.shelf = shelf
+      //})
+    //}))
+
+    BooksAPI.update(book, shelf)
   }
 
   render() {
@@ -23,6 +38,7 @@ class App extends Component {
         <Route exact path="/" render={() => (
           <ListBooks
             books={this.state.books}
+            onChangeBookShelf={this.changeBookShelf}
           />
         )} />
         <Route path="/search" render={({ history }) => (

@@ -14,4 +14,8 @@ const BookShelfChanger = () => {
   )
 }
 
+BookShelfChanger.propTypes = {
+  onChangeBookShelf: PropTypes.func.isRequired
+}
+
 export default BookShelfChanger
