@@ -11,6 +11,8 @@ class ListBooks extends Component {
   }
 
   render() {
+    const {books, onChangeBookShelf} = this.props
+
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -20,18 +22,18 @@ class ListBooks extends Component {
           <div>
             <BookShelf
               title="Currently Reading"
-              books={this.props.books.filter((b) => b.shelf === 'currentlyReading')}
-              onChangeBookShelf={this.props.onChangeBookShelf}
+              books={books.filter((b) => b.shelf === 'currentlyReading')}
+              onChangeBookShelf={onChangeBookShelf}
             />
             <BookShelf
               title="Want to Read"
-              books={this.props.books.filter((b) => b.shelf === 'wantToRead')}
-              onChangeBookShelf={this.props.onChangeBookShelf}
+              books={books.filter((b) => b.shelf === 'wantToRead')}
+              onChangeBookShelf={onChangeBookShelf}
             />
             <BookShelf
               title="Read"
-              books={this.props.books.filter((b) => b.shelf === 'read')}
-              onChangeBookShelf={this.props.onChangeBookShelf}
+              books={books.filter((b) => b.shelf === 'read')}
+              onChangeBookShelf={onChangeBookShelf}
             />
           </div>
         </div>
