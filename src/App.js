@@ -22,12 +22,6 @@ class App extends Component {
         (b) => b.id === book.id ? Object.assign({}, b, {shelf: shelf}) : b
       )
     })
-    //this.setState((state) => ({
-      //books: state.books.map((b) => {
-        //if(b.id === book.id)
-          //b.shelf = shelf
-      //})
-    //}))
 
     BooksAPI.update(book, shelf)
   }
@@ -42,7 +36,7 @@ class App extends Component {
           />
         )} />
         <Route path="/search" render={({ history }) => (
-          <SearchBooks />
+          <SearchBooks onChangeBookShelf={this.changeBookShelf} />
         )} />
       </div>
     )
