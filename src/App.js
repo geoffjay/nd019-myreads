@@ -26,6 +26,20 @@ class App extends Component {
     BooksAPI.update(book, shelf)
   }
 
+  addBookToShelf = (book, shelf) => {
+    this.state.books.push(book)
+    this.changeBookShelf(book, shelf)
+  }
+
+  checkShelf = (id) => {
+    for (let book of this.state.books) {
+      if (book.id === id) {
+        return book.shelf
+      }
+    }
+    return 'none'
+  }
+
   render() {
     return (
       <div className="app">
@@ -36,7 +50,10 @@ class App extends Component {
           />
         )} />
         <Route path="/search" render={({ history }) => (
-          <SearchBooks onChangeBookShelf={this.changeBookShelf} />
+          <SearchBooks
+            onChangeBookShelf={this.addBookToShelf}
+            onBookShelf={this.checkShelf}
+          />
         )} />
       </div>
     )

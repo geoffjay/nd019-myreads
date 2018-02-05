@@ -8,6 +8,7 @@ import Book from './Book'
 class SearchBooks extends Component {
 
   static propTypes = {
+    onBookShelf: PropTypes.func.isRequired,
     onChangeBookShelf: PropTypes.func.isRequired
   }
 
@@ -16,16 +17,24 @@ class SearchBooks extends Component {
     query: ''
   }
 
-  updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-    BooksAPI.search(this.state.query).then((books) => {
-      this.setState({ books: books.sort(sortBy('title')) })
-    })
+  handleChange = (e) => {
+    const query = e.target.value.trim()
+    this.setState({ query: query })
+    this.setState({ books: [] })
+    if (query !== '') {
+      BooksAPI.search(query).then((books) => {
+        books.map((book) => book.shelf = this.props.onBookShelf(book.id))
+        this.setState({ books: books })
+      })
+    }
   }
 
   render() {
     const { books, query } = this.state
     const { onChangeBookShelf } = this.props
+
+    if(books)
+      books.sort(sortBy('title'))
 
     return (
       <div className="search-books">
@@ -36,7 +45,7 @@ class SearchBooks extends Component {
               type="text"
               placeholder="Search by title or author"
               value={query}
-              onChange={(event) => this.updateQuery(event.target.value)}
+              onChange={(e) => this.handleChange(e)}
             />
           </div>
         </div>
