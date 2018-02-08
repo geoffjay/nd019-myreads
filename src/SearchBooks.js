@@ -17,6 +17,10 @@ class SearchBooks extends Component {
     query: ''
   }
 
+  /**
+   * @description Handle the change event from the input control.
+   * @param {object} e - The callback event
+   */
   handleChange = (e) => {
     const query = e.target.value.trim()
     this.setState({ query: query })
