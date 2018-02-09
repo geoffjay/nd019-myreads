@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
+import { DebounceInput } from 'react-debounce-input'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import * as BooksAPI from './BooksAPI'
@@ -22,7 +23,7 @@ class SearchBooks extends Component {
    * @param {object} e - The callback event
    */
   handleChange = (e) => {
-    const query = e.target.value.trim()
+    const query = e.target.value
     this.setState({ query: query })
     this.setState({ books: [] })
     if (query !== '') {
@@ -45,8 +46,10 @@ class SearchBooks extends Component {
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
-            <input
+            <DebounceInput
               type="text"
+              minLength={2}
+              debounceTimeout={300}
               placeholder="Search by title or author"
               value={query}
               onChange={(e) => this.handleChange(e)}
