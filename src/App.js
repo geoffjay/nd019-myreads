@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
+import NoMatch from './NoMatch'
 import './App.css'
 
 class App extends Component {
@@ -40,7 +41,9 @@ class App extends Component {
    * @param {string} shelf - The shelf to add the book on to
    */
   addBookToShelf = (book, shelf) => {
-    this.state.books.push(book)
+    this.setState({
+      books: this.state.books.push(book)
+    })
     this.changeBookShelf(book, shelf)
   }
 
@@ -61,18 +64,21 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={() => (
-          <ListBooks
-            books={this.state.books}
-            onChangeBookShelf={this.changeBookShelf}
-          />
-        )} />
-        <Route path="/search" render={({ history }) => (
-          <SearchBooks
-            onChangeBookShelf={this.addBookToShelf}
-            onBookShelf={this.checkShelf}
-          />
-        )} />
+        <Switch>
+          <Route exact path="/" render={() => (
+            <ListBooks
+              books={this.state.books}
+              onChangeBookShelf={this.changeBookShelf}
+            />
+          )} />
+          <Route path="/search" render={({ history }) => (
+            <SearchBooks
+              onChangeBookShelf={this.addBookToShelf}
+              onBookShelf={this.checkShelf}
+            />
+          )} />
+          <Route component={NoMatch} />
+        </Switch>
       </div>
     )
   }

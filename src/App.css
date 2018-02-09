@@ -172,3 +172,32 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* error page */
+
+.error-page {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.error-code {
+  font-size: 8em;
+  font-weight: bold;
+}
+
+.error-message {
+  font-size: 4em;
+}
+
+.error-confirmation {
+  display: block;
+  top: 20px;
+  left: 15px;
+  height: 53px;
+  background: white;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+}
