@@ -26,13 +26,15 @@ class App extends Component {
    * @param {string} shelf - The shelf to change the book to
    */
   changeBookShelf = (book, shelf) => {
-    this.setState({
-      books: this.state.books.map(
-        (b) => b.id === book.id ? Object.assign({}, b, {shelf: shelf}) : b
-      )
-    })
-
     BooksAPI.update(book, shelf)
+      .catch(error => console.error(error))
+      .then(response => {
+        this.setState({
+          books: this.state.books.map(
+            (b) => b.id === book.id ? Object.assign({}, b, {shelf: shelf}) : b
+          )
+        })
+      })
   }
 
   /**
