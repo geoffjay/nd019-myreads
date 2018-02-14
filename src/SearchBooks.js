@@ -29,7 +29,7 @@ class SearchBooks extends Component {
     if (query !== '') {
       BooksAPI.search(query).then((books) => {
         books.map((book) => book.shelf = this.props.onBookShelf(book.id))
-        this.setState({ books: books })
+        this.setState({ books })
       })
     }
   }

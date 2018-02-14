@@ -43,8 +43,10 @@ class App extends Component {
    * @param {string} shelf - The shelf to add the book on to
    */
   addBookToShelf = (book, shelf) => {
+    const books = this.state.books
+    books.push(book)
     this.setState({
-      books: this.state.books.push(book)
+      books
     })
     this.changeBookShelf(book, shelf)
   }
